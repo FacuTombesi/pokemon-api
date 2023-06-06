@@ -51,18 +51,6 @@ const getAllPokemon = async () => {
 
 // ------------------------ GET BY ID / TYPE ------------------------
 
-// const findByApiId = async (id) => {
-//     const apiPokemon = await getPokemonApi();
-//     const pokemonById = apiPokemon.filter((p) => p.id == id);
-//     if (pokemonById.length) return pokemonById;
-//     else throw Error(`No Pokémon with the ID: ${id} registered in the Pokédex`);
-// };
-
-// const findByDbId = async (id) => {
-//     const pokemonById = await Pokemon.findByPk(id);
-//     return pokemonById;
-// };
-
 const findById = async (id) => {
     const allPokemon = await getAllPokemon();
     const pokemonById = allPokemon.filter((p) => p.id == id);
@@ -107,8 +95,6 @@ module.exports = {
     getPokemonApi,
     getPokemonDb,
     getAllPokemon,
-    // findByApiId,
-    // findByDbId,
     findById,
     createPokemon
 };
