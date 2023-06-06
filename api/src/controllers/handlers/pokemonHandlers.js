@@ -1,10 +1,11 @@
 const {
     getAllPokemon,
-    findByApiId,
-    findByDbId,
+    // findByApiId,
+    // findByDbId,
+    findById,
     createPokemon
 } = require("../pokemonControllers");
-const isUUID = require("is-uuid");
+// const isUUID = require("is-uuid");
 
 const getPokemonHandler = async (req, res) => {
     const { name } = req.query;
@@ -20,16 +21,24 @@ const getPokemonHandler = async (req, res) => {
 };
 
 const getPokemonByIdHandler = async (req, res) => {
-    const { id } = req.params;
+    // const { id } = req.params;
+    // try {
+    //     const pokemonById = isUUID.v4(id) 
+    //         ? await findByDbId(id) 
+    //         : await findByApiId(id);
+    //     isUUID.v4(id)
+    //         ? res.status(200).json([pokemonById])
+    //         : res.status(200).json(pokemonById);
+    // }   catch (error) {
+    //     res.status(400).json({ error: error.message });
+    // }
+
     try {
-        const pokemonById = isUUID.v4(id) 
-            ? await findByDbId(id) 
-            : await findByApiId(id);
-        isUUID.v4(id)
-            ? res.status(200).json([pokemonById])
-            : res.status(200).json(pokemonById);
+        const { id } = req.params;
+        let pokemonById = await findById(id);
+        res.status(200).json(pokemonById);
     }   catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(404).json({ error: error.message });
     }
 };
 
