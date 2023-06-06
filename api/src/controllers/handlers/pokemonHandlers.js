@@ -12,8 +12,8 @@ const getPokemonHandler = async (req, res) => {
     const allPokemon = await getAllPokemon();
     try {
         if (!name) return res.status(200).json(allPokemon);
-        const findByName = (await allPokemon).filter((p) => p.name.toLowerCase().includes(name.toLowerCase()));
-        if (!findByName[0]) return res.status(200).json(`The are no Pokémons with the name: ${name} registerede in the Pokédex`);
+        const findByName = allPokemon.filter((p) => p.name.toLowerCase().includes(name.toLowerCase()));
+        if (!findByName[0]) return res.status(200).json(`The are no Pokémons with the name: ${name} registered in the Pokédex`);
         return res.status(200).json(findByName);
     }   catch (error) {
         res.status(404).send("The Pokédex is empty");

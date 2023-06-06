@@ -49,7 +49,7 @@ const getAllPokemon = async () => {
     return allPokemon;
 };
 
-// ------------------------ GET BY ID / NAME ------------------------
+// ------------------------ GET BY ID / TYPE ------------------------
 
 // const findByApiId = async (id) => {
 //     const apiPokemon = await getPokemonApi();
