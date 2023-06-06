@@ -1,0 +1,37 @@
+const { Type } = require("../db");
+const axios = require("axios");
+
+// URLs de la api
+const typeApiUrl = "https://pokeapi.co/api/v2/type";
+
+const getTypesApi = async () => {
+    const response = await axios.get(typeApiUrl);
+    const types = response.data.results;
+    const typesNames = [];
+    for (let type of types) {
+        let fintType = await Type.findOne({ where: { name: type.name } }); // Busco si ya tengo el tipo de pokemon para evitar duplicarlo
+        if (fintType) {
+            typesNames.push(fintType);
+        }   else {
+            const newType = await Type.create({
+                name: type.name
+            });
+            typesNames.push(newType);
+        }
+    }
+    return typesNames;
+};
+
+const getAllTypes = async () => {
+    try {
+        const type = await getTypesApi();
+        res.status(200).json(type);
+    }   catch (error) {
+        return res.status(404).json({ error: error.message });
+    }
+};
+
+module.exports = {
+    getTypesApi,
+    getAllTypes
+};

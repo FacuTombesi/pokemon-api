@@ -3,7 +3,6 @@ const axios = require("axios");
 
 // URLs de la api
 const pokemonApiUrl = "https://pokeapi.co/api/v2/pokemon";
-const typeApiUrl = "https://pokeapi.co/api/v2/type";
 
 // ------------------------ GET POKEMONS ------------------------
 
@@ -52,21 +51,56 @@ const getAllPokemon = async () => {
 
 // ------------------------ GET BY ID / NAME ------------------------
 
-const findById = async (id) => {
-    const allPokemon = await getAllPokemon();
-    const pokemonById = allPokemon.filter((p) => p.id == id);
-    if (pokemonById) return pokemonById;
-    else throw Error(`No Pokémon with the ID: ${id} registered in the Pokedex`);
+const findByApiId = async (id) => {
+    const apiPokemon = await getPokemonApi();
+    const pokemonById = apiPokemon.filter((p) => p.id == id);
+    if (pokemonById.length) return pokemonById;
+    else throw Error(`No Pokémon with the ID: ${id} registered in the Pokédex`);
 };
 
-const findByName = async (name) => {};
+const findByDbId = async (id) => {
+    const pokemonById = await Pokemon.findByPk(id);
+    return pokemonById;
+};
 
 // ------------------------ POST POKEMON ------------------------
+
+const createPokemon = async (
+    name,
+    image,
+    type,
+    hp,
+    attack,
+    defense,
+    spAttack,
+    spDefense,
+    speed,
+    height,
+    weight
+) => {
+    if (!name || !image || !hp || !attack || !defense || !spAttack || !spDefense) throw Error ("Missing important information")
+    const newPokemon = await Pokemon.create({
+        name,
+        image,
+        hp,
+        attack,
+        defense,
+        spAttack,
+        spDefense,
+        speed,
+        height,
+        weight
+    });
+    const typeFromDb = await Type.findAll({ where: { name: type } });
+    newPokemon.addTypes(typeFromDb);
+    return newPokemon;
+};
 
 module.exports = {
     getPokemonApi,
     getPokemonDb,
     getAllPokemon,
-    findById,
-    findByName
+    findByApiId,
+    findByDbId,
+    createPokemon
 };
