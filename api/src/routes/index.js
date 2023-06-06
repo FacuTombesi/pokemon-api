@@ -2,7 +2,7 @@ const { Router } = require("express");
 // Importar todos los routers;
 // Ejemplo: const authRouter = require("./auth.js");
 const Pokemon = require("./middlewares/pokemonRouter");
-// const Type = require("./middlewares/typeRouter");
+const Type = require("./middlewares/typeRouter");
 
 const router = Router();
 
@@ -10,6 +10,6 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.use("/pokemon", Pokemon);
-// router.use("/types", Type);
+router.use("/types", Type);
 
 module.exports = router;
