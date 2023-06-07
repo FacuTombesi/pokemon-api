@@ -7,7 +7,7 @@ const pokemonApiUrl = "https://pokeapi.co/api/v2/pokemon";
 // ------------------------ GET POKEMONS ------------------------
 
 const getPokemonApi = async () => {
-    const apiUrl = await axios.get(pokemonApiUrl); // Por ahora limito a 40 pokemons. BORRAR DESPUES !!
+    const apiUrl = await axios.get(pokemonApiUrl);
     const pokeFromApi = []; // Guardo en un array la URL de cada pokemon con su info
     apiUrl.data.results.forEach((p) => {
         pokeFromApi.push(
