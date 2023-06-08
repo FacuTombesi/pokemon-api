@@ -2,7 +2,7 @@ const { Pokemon, Type } = require("../db");
 const axios = require("axios");
 
 // URLs de la api
-const pokemonApiUrl = "https://pokeapi.co/api/v2/pokemon";
+const pokemonApiUrl = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
 
 // ------------------------ GET POKEMONS ------------------------
 
@@ -21,7 +21,7 @@ const getPokemonApi = async () => {
                 return {
                     id: poke.id,
                     name: poke.name,
-                    image: poke.sprites.versions["generation-v"]["black-white"]["animated"].front_default,
+                    image: poke.sprites.versions["generation-vi"]["omegaruby-alphasapphire"].front_default,
                     type: poke.types.map((t) => t.type.name),
                     hp: poke.stats[0].base_stat,
                     attack: poke.stats[1].base_stat,
@@ -49,7 +49,7 @@ const getAllPokemon = async () => {
     return allPokemon;
 };
 
-// ------------------------ GET BY ID / TYPE ------------------------
+// ------------------------ GET BY ID ------------------------
 
 const findById = async (id) => {
     const allPokemon = await getAllPokemon();
