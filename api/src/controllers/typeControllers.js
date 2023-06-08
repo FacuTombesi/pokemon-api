@@ -9,9 +9,9 @@ const getAllTypes = async () => {
     const types = response.data.results;
     const typesNames = [];
     for (let type of types) {
-        let fintType = await Type.findOne({ where: { name: type.name } }); // Busco si ya tengo el tipo de pokemon para evitar duplicarlo
-        if (fintType) {
-            typesNames.push(fintType);
+        let findType = await Type.findOne({ where: { name: type.name } }); // Busco si ya tengo el tipo de pokemon para evitar duplicarlo
+        if (findType) {
+            typesNames.push(findType);
         }   else {
             const newType = await Type.create({
                 name: type.name
