@@ -9,7 +9,7 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-router.use("/pokemon", Pokemon);
+router.use("/pokemons", Pokemon);
 router.use("/types", Type);
 
 module.exports = router;
