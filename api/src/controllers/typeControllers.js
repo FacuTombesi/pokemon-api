@@ -4,7 +4,7 @@ const axios = require("axios");
 // URLs de la api
 const typeApiUrl = "https://pokeapi.co/api/v2/type";
 
-const getTypesApi = async () => {
+const getAllTypes = async () => {
     const response = await axios.get(typeApiUrl);
     const types = response.data.results;
     const typesNames = [];
@@ -22,16 +22,6 @@ const getTypesApi = async () => {
     return typesNames;
 };
 
-const getAllTypes = async () => {
-    try {
-        const type = await getTypesApi();
-        res.status(200).json(type);
-    }   catch (error) {
-        return res.status(404).json({ error: error.message });
-    }
-};
-
 module.exports = {
-    getTypesApi,
     getAllTypes
 };
