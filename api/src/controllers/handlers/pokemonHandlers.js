@@ -33,7 +33,6 @@ const createPokemonHandler = async (req, res) => {
     const {
         name,
         image,
-        type,
         hp,
         attack,
         defense,
@@ -41,13 +40,13 @@ const createPokemonHandler = async (req, res) => {
         spDefense,
         speed,
         height,
-        weight
+        weight,
+        type
     } = req.body;
     try {
         const newPokemon = await createPokemon(
             name,
             image,
-            type,
             hp,
             attack,
             defense,
@@ -55,7 +54,8 @@ const createPokemonHandler = async (req, res) => {
             spDefense,
             speed,
             height,
-            weight
+            weight,
+            type
         );
         res.status(200).send(`${name} added to the Pokédex`);
         return newPokemon;
