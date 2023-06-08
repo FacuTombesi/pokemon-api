@@ -22,7 +22,6 @@ const getPokemonApi = async () => {
                     id: poke.id,
                     name: poke.name,
                     image: poke.sprites.versions["generation-vi"]["omegaruby-alphasapphire"].front_default,
-                    type: poke.types.map((t) => t.type.name),
                     hp: poke.stats[0].base_stat,
                     attack: poke.stats[1].base_stat,
                     defense: poke.stats[2].base_stat,
@@ -31,6 +30,7 @@ const getPokemonApi = async () => {
                     speed: poke.stats[5].base_stat,
                     height: poke.height,
                     weight: poke.weight,
+                    type: poke.types.map((t) => t.type.name),
                 }; // Devuelvo toda la info de cada pokemon
             })
         );
@@ -63,7 +63,6 @@ const findById = async (id) => {
 const createPokemon = async (
     name,
     image,
-    type,
     hp,
     attack,
     defense,
@@ -71,7 +70,8 @@ const createPokemon = async (
     spDefense,
     speed,
     height,
-    weight
+    weight,
+    type
 ) => {
     if (!name || !image || !hp || !attack || !defense || !spAttack || !spDefense) throw Error ("Missing important information")
     const newPokemon = await Pokemon.create({
